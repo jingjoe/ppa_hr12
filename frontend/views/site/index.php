@@ -105,9 +105,18 @@ $this->title = 'การบริหารงบค่าใช้จ่าย�
 
 
 <?php
-    if ($cyear == "2562") { 
-        echo  $this->render('_ppa2562');
+    if ($cyear == "2562" && $provcode<>'01' ) { 
+        echo  $this->render('_ppa2562',[
+            'cyear' => $cyear,
+            'provcode' => $provcode
+        ]);
     }  
 ?>
-
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pull-right bg-danger">
+            <span class="glyphicon glyphicon-time"></span> วันที่ประมวลผล <?php echo $date; ?> น.
+        </div>
+    </div>
+</div>
 <?= \bluezed\scrollTop\ScrollTop::widget() ?>

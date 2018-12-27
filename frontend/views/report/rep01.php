@@ -148,7 +148,7 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
             ],
             'responsive' => true,
             'hover' => true,
-			'autoXlFormat'=>true,
+	    'autoXlFormat'=>true,
             'exportConfig' => [
                    GridView::CSV => ['label' => 'Export as CSV', 'filename' => 'ppa_y'.$cyear.'ppa_code'.$pacode.'date'.date('Y-d-m')],
                    GridView::PDF => ['label' => 'Export as PDF', 'filename' => 'ppa_y'.$cyear.'ppa_code'.$pacode.'date'.date('Y-d-m')],
@@ -165,7 +165,7 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
             ], 
         // set export properties
             'export' => [
-				'showConfirmAlert'=>false,
+		'showConfirmAlert'=>false,
                 'fontAwesome' => false
             ],
             //'pjax' => true,
@@ -184,7 +184,7 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
                 ],
                 [
                     'attribute' => 'HOSPCODE',
-					'format'=>'text', 
+                    'format'=>'text', 
                     'header' => 'รหัสหน่วยบริการ'
                 ],
                 [
@@ -218,7 +218,7 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
                     'hAlign'=>'right',
                     'format'=>['decimal', 2],
                     'width' => '10%',
-					'pageSummary' => $percent
+                    'pageSummary' => $percent
                 ], 
                /* [
                     'class' => 'kartik\grid\FormulaColumn', 

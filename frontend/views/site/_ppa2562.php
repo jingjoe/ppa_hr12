@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
                 </div> 
                 
                 <div class="panel-body"> 
-                      <?php echo Html::a(Html::img(Yii::getAlias('@web') . '/images/vaccine.png', ['alt' => 'some', 'class' => 'img-responsive']), ['ppa2562/activity1']); ?>
+                      <?php echo Html::a(Html::img(Yii::getAlias('@web') . '/images/vaccine.png', ['alt' => 'some', 'class' => 'img-responsive']), ['ppa2562/epifully','cyear' => $cyear, 'provcode' => $provcode]); ?>
 
                 </div> 
             </div>
@@ -27,7 +27,7 @@ use yii\helpers\ArrayHelper;
                     <p> ตัวชี้วัดที่ 1 ร้อยละของกลุ่มเสี่ยงได้รับการประเมินโอกาสเสี่ยงต่อโรคหัวใจและหลอดเลือด (CVD Risk)</p>
                 </div> 
                 <div class="panel-body"> 
-                      <?php echo Html::a(Html::img(Yii::getAlias('@web') . '/images/cvd_risk1.png', ['alt' => 'some', 'class' => 'img-responsive']), ['ppa2562/activity2']); ?>
+                      <?php echo Html::a(Html::img(Yii::getAlias('@web') . '/images/cvd_risk1.png', ['alt' => 'some', 'class' => 'img-responsive']), ['ppa2562/cvdrisk01','cyear' => $cyear, 'provcode' => $provcode]); ?>
 
                   
                 </div> 
@@ -41,7 +41,7 @@ use yii\helpers\ArrayHelper;
                     <p> ตัวชี้วัดที่ 2 ผลการประเมินโอกาสเสี่ยงต่อการเกิดโรคหัวใจและหลอดเลือด (CVD Risk...</p>
                 </div> 
                 <div class="panel-body"> 
-                      <?php echo Html::a(Html::img(Yii::getAlias('@web') . '/images/cvd_risk2.png', ['alt' => 'some', 'class' => 'img-responsive']), ['ppa2562/activity3']); ?>
+                      <?php echo Html::a(Html::img(Yii::getAlias('@web') . '/images/cvd_risk2.png', ['alt' => 'some', 'class' => 'img-responsive']), ['ppa2562/cvdrisk02','cyear' => $cyear, 'provcode' => $provcode]); ?>
 
                   
                 </div> 

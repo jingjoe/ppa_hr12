@@ -87,6 +87,10 @@ class SiteController extends Controller
        
      
         if ($cyear == "2562") {
+            
+            $q_date = "SELECT IF(MIN(D_COM) IS NULL,'0000-00-00 00:00:00',MIN(D_COM)) AS d_com FROM s_result_2562 WHERE BYEAR=$cyear AND PROVCODE=$provcode ";
+            $sql_date = Yii::$app->db->createCommand($q_date)->queryOne();
+            $date =  $sql_date['d_com'];
 
             $sql = "SELECT IDPROJECT,NAMEPROJECT,IF(D_COM IS NULL,NOW(),MIN(D_COM)) AS D_COM
                     FROM s_result_2562
@@ -99,6 +103,10 @@ class SiteController extends Controller
                 'allModels'=>$data,
             ]);
         } else {
+            
+            $q_date = "SELECT IF(MIN(D_COM) IS NULL,'0000-00-00 00:00:00',MIN(D_COM)) AS d_com FROM s_result WHERE BYEAR=$cyear AND PROVCODE=$provcode ";
+            $sql_date = Yii::$app->db->createCommand($q_date)->queryOne();
+            $date =  $sql_date['d_com'];
 
             $sql = "SELECT IDPROJECT,NAMEPROJECT,IF(D_COM IS NULL,NOW(),MIN(D_COM)) AS D_COM
                     FROM s_result
@@ -115,6 +123,7 @@ class SiteController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider, 
             'cyear' => $cyear,
+            'date' =>  $date,
             'provcode' => $provcode]);
     }
     /**

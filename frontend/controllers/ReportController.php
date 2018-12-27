@@ -23,10 +23,10 @@ class ReportController extends Controller {
             $sql_ppaname = "SELECT CONCAT(IDPROJECT,' : ',NAMEPROJECT)  AS ppaname FROM s_result_2562 WHERE IDPROJECT= '$pacode' ";
 
             $sql = "SELECT BYEAR,HOSPCODE,HOSPNAME,TARGET,RESULT,PERCENT
-                FROM s_result_2562
-                WHERE  BYEAR=$cyear 
-                AND PROVCODE=  '$provcode'
-		        AND IDPROJECT=  '$pacode' ";
+                    FROM s_result_2562
+                    WHERE  BYEAR=$cyear 
+                    AND PROVCODE=  '$provcode'
+                    AND IDPROJECT=  '$pacode' ";
             
             $ppaname = Yii::$app->db->createCommand($sql_ppaname)->queryAll();
        
@@ -43,10 +43,10 @@ class ReportController extends Controller {
             $sql_ppaname = "SELECT CONCAT(IDPROJECT,' : ',NAMEPROJECT)  AS ppaname FROM s_result WHERE IDPROJECT= '$pacode' ";
 
             $sql = "SELECT BYEAR,HOSPCODE,HOSPNAME,TARGET,RESULT,PERCENT
-                FROM s_result 
-                WHERE  BYEAR=$cyear 
-                AND PROVCODE=  '$provcode'
-		        AND IDPROJECT=  '$pacode' ";
+                    FROM s_result 
+                    WHERE  BYEAR=$cyear 
+                    AND PROVCODE=  '$provcode'
+                    AND IDPROJECT=  '$pacode' ";
             
             
             $ppaname = Yii::$app->db->createCommand($sql_ppaname)->queryAll();
