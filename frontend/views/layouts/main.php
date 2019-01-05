@@ -82,7 +82,7 @@ echo Nav::widget([
 </div>
 
 <footer class="footer">
-                <?php $cc = Yii::$app->db->createCommand("SELECT COUNT(id) FROM session_frontend_user")->queryScalar(); ?>
+                <?php $cc = Yii::$app->db->createCommand("SELECT COUNT(id) FROM ppa_session_frontend_user")->queryScalar(); ?>
       <div class="container">
             <?php
                 $ver = file_get_contents(Yii::getAlias('@webroot/version/version.txt'));

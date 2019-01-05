@@ -116,7 +116,66 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
         ");
 ?>
 <br>
+ <?php
+    
+    $data = $dataProvider->getModels();
+    
+    //target61
+        $categ = [];
+        for ($i = 0; $i < count($data); $i++) {
+            $categ[] = $data[$i]['ta61'];
+        }
+        $t = implode(",", $categ);
+        
+  
+        $target61 = 0;
+        foreach(explode(',',$t) as $val)
+             $target61 +=intval($val);
 
+    //target61
+        $categ = [];
+        for ($i = 0; $i < count($data); $i++) {
+            $categ[] = $data[$i]['ta62'];
+        }
+        $t = implode(",", $categ);
+        
+  
+        $target62 = 0;
+        foreach(explode(',',$t) as $val)
+             $target62 +=intval($val);
+
+
+
+    // result61  
+        $categ = [];
+        for ($i = 0; $i < count($data); $i++) {
+            $categ[] = $data[$i]['re61'];
+        }
+        $r = implode(",", $categ);
+        
+        $result61 = 0;
+        foreach(explode(',',$r) as $val)
+             $result61 +=intval($val);
+
+    // result62  
+        $categ = [];
+        for ($i = 0; $i < count($data); $i++) {
+            $categ[] = $data[$i]['re62'];
+        }
+        $r = implode(",", $categ);
+        
+  
+       $result62 = 0;
+        foreach(explode(',',$r) as $val)
+             $result62 +=intval($val);
+        
+
+        $percent61 = @number_format($result61*100/$target61, 2, '.', '');
+
+        $percent62 = @number_format($result62*100/$target62, 2, '.', '');
+        
+            
+ ?>
     <?=GridView::widget([
             'dataProvider' => $dataProvider,
             'showPageSummary'=>true,
@@ -125,8 +184,9 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
                 [
                     'columns'=>[
                         ['content'=>'', 'options'=>['colspan'=>3, 'class'=>'text-center default']], 
-                        ['content'=>'ข้อมูลปี 2561', 'options'=>['colspan'=>3, 'class'=>'text-center info']], 
-                        ['content'=>'ข้อมูลปี 2562', 'options'=>['colspan'=>4, 'class'=>'text-center success']], 
+                        ['content'=>'ข้อมูลปี 2561', 'options'=>['colspan'=>3, 'class'=>'text-center warning']], 
+                        ['content'=>'ข้อมูลปี 2562', 'options'=>['colspan'=>3, 'class'=>'text-center warning']],
+                        ['content'=>'', 'options'=>['colspan'=>1, 'class'=>'text-center default']],
                     ],
                     'options'=>['class'=>'skip-export'] // remove this row from export
                 ]
@@ -140,11 +200,8 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
             'hover' => true,
 	    'autoXlFormat'=>true,
             'exportConfig' => [
-                   GridView::CSV => ['label' => 'Export as CSV', 'filename' => 'ppa_y'.$cyear.'date'.date('Y-d-m')],
-                   GridView::PDF => ['label' => 'Export as PDF', 'filename' => 'ppa_y'.$cyear.'date'.date('Y-d-m')],
-                   GridView::EXCEL=> ['label' => 'Export as EXCEL', 'filename' => 'ppa_y'.$cyear.'date'.date('Y-d-m')],
-                   GridView::TEXT=> ['label' => 'Export as TEXT', 'filename' => 'ppa_y'.$cyear.'date'.date('Y-d-m')],
-                ],
+                   GridView::EXCEL=> ['label' => 'ส่งออกไฟล์ excel', 'filename' => 'epifully'.date('Y-d-m')],
+            ],
         // set your toolbar
             'toolbar' =>  [
                 ['content' => 
@@ -166,15 +223,13 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
             ],
             'columns' => [
                 [
-                    'class' => 'kartik\grid\SerialColumn',
-                    'contentOptions' => ['class'=>'text-center warning']  
+                    'class' => 'kartik\grid\SerialColumn', 
                 ],
                 [
                     'attribute' => 'hmain',
                     'format'=>'text', 
-                    'header' => 'รหัสหน่วยบริการ',
-                    'width' => '15%',
-
+                    'header' => 'รหัส',
+                    'hAlign' => 'center'
                 ],
                 [
                     'label' => 'ชื่อหน่วยบริการ',
@@ -183,22 +238,22 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
                         return Html::a(Html::encode($model['hmainname']), ['/ppa2562/detailepi', 'cyear' => $cyear, 'provcode' => $provcode, 'hospcode' => $model['hmain']]);
                     },
                     'pageSummary'=>'รวมทั้งหมด',
-                    'width' => '30%',
-            
-                            
+                    'width' => '30%',          
                 ], 
                 [
                     'attribute'=>'ta61',
                     'header' => 'เป้าหมาย',
                     'hAlign'=>'right',
-                    'contentOptions' => ['class'=>'text info'],
+                    'format'=>['decimal', 0],
+                    'contentOptions' => ['class'=>'text success'],
                     'pageSummary'=>true
                 ],
                 [
                     'attribute'=>'re61',
                     'header' => 'ผลงาน',
                     'hAlign'=>'right',
-                    'contentOptions' => ['class'=>'text info'],
+                    'format'=>['decimal', 0],
+                    'contentOptions' => ['class'=>'text success'],
                     'pageSummary'=>true
                 ],
                 [
@@ -206,21 +261,23 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
                     'header' => 'ร้อยละ %',
                     'hAlign'=>'right',
                     'format'=>['decimal', 2],
-                    'contentOptions' => ['class'=>'text info'],
-                    'pageSummary'=>''
+                    'contentOptions' => ['class'=>'text success'],
+                    'pageSummary'=>$percent61
                 ],
                 [
                     'attribute'=>'ta62',
                     'header' => 'เป้าหมาย',
+                    'format'=>['decimal', 0],
                     'hAlign'=>'right',
-                    'contentOptions' => ['class'=>'text success'],
+                    'contentOptions' => ['class'=>'text info'],
                     'pageSummary'=>true
                 ],
                 [
                     'attribute'=>'re62',
                     'header' => 'ผลงาน',
                     'hAlign'=>'right',
-                    'contentOptions' => ['class'=>'text success'],
+                    'format'=>['decimal', 0],
+                    'contentOptions' => ['class'=>'text info'],
                     'pageSummary'=>true
                 ],
                 [
@@ -228,8 +285,8 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
                     'header' => 'ร้อยละ %',
                     'hAlign'=>'right',
                     'format'=>['decimal', 2],
-                    'contentOptions' => ['class'=>'text success'],
-                    'pageSummary'=>''
+                    'contentOptions' => ['class'=>'text info'],
+                    'pageSummary'=>$percent62
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
@@ -238,7 +295,7 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
                     'format' => 'raw',
                     'header' => 'แปลผล',
                     'value'=>function($model,$url){
-                        if($model['percent62'] >= $model['percent61'])
+                        if($model['percent62'] >= $model['percent61']) 
                         {
                              return '<span style="color:green"><i class="glyphicon glyphicon-arrow-up"></i></span>';
                         }
@@ -246,12 +303,24 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
                         {
                            return '<span style="color:red"><i class="glyphicon glyphicon-arrow-down"></i></span>';
                         }
-                    }
+                    },
+                    'pageSummary'=>$percent62-$percent61
                 ],
             ]
         ]);
         ?>
      </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pull-left">
+            <span style="color:green"><i class="glyphicon glyphicon-arrow-up"></i></span> แปลผล : ผลงาน% ปีล่าสุด >= ผลงาน% ปีที่ผ่านมา
+            <span style="color:red"><i class="glyphicon glyphicon-arrow-down"></i></span> แปลผล : ผลงาน% ปีล่าสุด < ผลงาน% ปีที่ผ่านมา
+        </div>
+        <div class="pull-right">
+            <span class="glyphicon glyphicon-time"></span> วันที่ประมวลผล <?php echo $date; ?> น.
+        </div>
+    </div>
 </div>
 
 <?= \bluezed\scrollTop\ScrollTop::widget() ?>

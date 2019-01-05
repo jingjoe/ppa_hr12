@@ -50,13 +50,16 @@ class Report2Controller extends Controller{
         $sepacode = "";
             if (Yii::$app->request->isPost) {$sepacode = $_POST['sepacode'];
         }
-       
 
-        $sql_ppaname = "SELECT CONCAT(IDPROJECT,' : ',NAMEPROJECT)  AS ppaname FROM s_result WHERE IDPROJECT= '$sepacode' ";
-        $sql_ppacom = "SELECT IF(D_COM IS NULL,NOW(),MIN(D_COM)) AS d_com FROM s_result WHERE IDPROJECT= '$sepacode' ";
+        $q_date = "SELECT IF(MIN(D_COM) IS NULL,'0000-00-00 00:00:00',MIN(D_COM)) AS d_com FROM ppa_s_result WHERE BYEAR=$cyear AND IDPROJECT='$sepacode' ";
+        $sql_date = Yii::$app->db->createCommand($q_date)->queryOne();
+        $date =  $sql_date['d_com'];
+        
+        $sql_ppaname = "SELECT CONCAT(IDPROJECT,' : ',NAMEPROJECT)  AS ppaname FROM ppa_s_result WHERE IDPROJECT= '$sepacode' ";
+        $sql_ppacom = "SELECT IF(D_COM IS NULL,NOW(),MIN(D_COM)) AS d_com FROM ppa_s_result WHERE IDPROJECT= '$sepacode' ";
         
         $sql = "SELECT BYEAR,IDPROJECT,NAMEPROJECT,HOSPNAME,IF(D_COM IS NULL,NOW(),MIN(D_COM)) AS D_COM
-                FROM s_result
+                FROM ppa_s_result
                 WHERE BYEAR=$cyear
                 AND IDPROJECT LIKE '$sepacode%'
                 GROUP BY IDPROJECT ";
@@ -76,6 +79,7 @@ class Report2Controller extends Controller{
                 'ppaname' => $ppaname,
                 'ppacom' => $ppacom,
                 'pacode' => $sepacode,
+                'date' =>  $date,
                 'dataProvider' => $dataProvider]);
     }
     
@@ -117,9 +121,9 @@ class Report2Controller extends Controller{
   public function getSQLRep02($model)
     {
        $sql = "SELECT s.byear,c.hoscode,c.hosname,r.IDPROJECT,r.NAMEPROJECT,s.result,s.d_com
-                FROM s_pparesult s
-                INNER JOIN chospital c ON c.hoscode=s.hospcode
-                INNER JOIN s_result r ON r.IDPROJECT=s.pacode
+                FROM ppa_s_pparesult s
+                INNER JOIN ppa_chospital c ON c.hoscode=s.hospcode
+                INNER JOIN ppa_s_result r ON r.IDPROJECT=s.pacode
                 WHERE  s.byear=:byear
                 AND s.provcode=:province
                 AND s.hospcode=:hospital
@@ -201,13 +205,13 @@ class Report2Controller extends Controller{
             $this->redirect(Yii::$app->urlManager->createAbsoluteUrl('site/login'));
         }
         
-        $sql_date = Yii::$app->db->createCommand('SELECT d_send FROM s_pparesult')->queryOne();
+        $sql_date = Yii::$app->db->createCommand('SELECT d_send FROM ppa_s_pparesult')->queryOne();
         $date =  $sql_date['d_send'];
         
-        $sql = "SELECT s.byear,c.hoscode,c.hosname,r.IDPROJECT,r.NAMEPROJECT,s.result
-                FROM s_pparesult s
-                INNER JOIN chospital c ON c.hoscode=s.hospcode
-                INNER JOIN s_result r ON r.IDPROJECT=s.pacode
+        $sql = "SELECT s.byear,c.hoscode,c.hosname,r.IDPROJECT,r.NAMEPROJECT,s.result,s.d_com
+                FROM ppa_s_pparesult s
+                INNER JOIN ppa_chospital c ON c.hoscode=s.hospcode
+                INNER JOIN ppa_s_result r ON r.IDPROJECT=s.pacode
 		GROUP BY s.hospcode ,s.pacode
                 ORDER BY s.pacode ";
 
@@ -225,13 +229,13 @@ class Report2Controller extends Controller{
     
     public function actionDetail1($byear=NULL,$pacode=NULL){
        
-        $sql_ppaname = "SELECT CONCAT(IDPROJECT,' : ',NAMEPROJECT)  AS ppaname FROM s_result WHERE IDPROJECT= '$pacode' ";
-        $sql_ppacom = "SELECT IF(D_COM IS NULL,NOW(),MIN(D_COM)) AS d_com FROM s_result WHERE IDPROJECT= '$pacode' ";
+        $sql_ppaname = "SELECT CONCAT(IDPROJECT,' : ',NAMEPROJECT)  AS ppaname FROM ppa_s_result WHERE IDPROJECT= '$pacode' ";
+        $sql_ppacom = "SELECT IF(D_COM IS NULL,NOW(),MIN(D_COM)) AS d_com FROM ppa_s_result WHERE IDPROJECT= '$pacode' ";
         
-        $sql_detail1 = "SELECT s.byear,c.hoscode,c.hosname,r.IDPROJECT,r.NAMEPROJECT,s.result
-                        FROM s_pparesult s
-                        INNER JOIN chospital c ON c.hoscode=s.hospcode
-                        INNER JOIN s_result r ON r.IDPROJECT=s.pacode
+        $sql_detail1 = "SELECT s.byear,c.hoscode,c.hosname,r.IDPROJECT,r.NAMEPROJECT,s.result,s.d_com
+                        FROM ppa_s_pparesult s
+                        INNER JOIN ppa_chospital c ON c.hoscode=s.hospcode
+                        INNER JOIN ppa_s_result r ON r.IDPROJECT=s.pacode
                         WHERE  s.byear=$byear
                         AND s.pacode='$pacode'
 			GROUP BY s.hospcode ,s.pacode

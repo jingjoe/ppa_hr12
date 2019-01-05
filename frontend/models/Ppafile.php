@@ -19,7 +19,7 @@ class Ppafile extends \yii\db\ActiveRecord{
     const DOC_PATH = 'ppafile';
 
     public static function tableName() {
-        return 'ppafile';
+        return 'ppa_file';
     }
 
     public function rules()

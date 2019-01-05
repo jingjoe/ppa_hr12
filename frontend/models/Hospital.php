@@ -22,7 +22,7 @@ class Hospital extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'hospital';
+        return 'ppa_hospital';
     }
 
     /**

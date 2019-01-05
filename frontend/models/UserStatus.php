@@ -17,7 +17,7 @@ class UserStatus extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'user_status';
+        return 'ppa_user_status';
     }
 
     /**

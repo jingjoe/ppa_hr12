@@ -28,17 +28,14 @@ $this->params['breadcrumbs'][] = ['label' => 'รายงานผลการ�
             'panel' => [
                 'type' => GridView::TYPE_DEFAULT,
                 //'heading' => '<h3 class="panel-title"><i class="fa fa-file-excel-o"></i>ชื่อไฟล์ </h3>',
-                'after' => 'วันที่ประมวลผล '.date('Y-m-d H:i:s').' น.',
+                //'after' => 'วันที่ประมวลผล '.date('Y-m-d H:i:s').' น.',
                 'footer'=>false
             ],
             'responsive' => true,
             'hover' => true,
-			'autoXlFormat'=>true,
+            'autoXlFormat'=>true,
             'exportConfig' => [
-                   GridView::CSV => ['label' => 'Export as CSV', 'filename' => 'ppa2561all_'.date('Y-d-m')],
-                   GridView::PDF => ['label' => 'Export as PDF', 'filename' => 'ppa2561all_'.date('Y-d-m')],
-                   GridView::EXCEL=> ['label' => 'Export as EXCEL', 'filename' => 'ppa2561all_'.date('Y-d-m')],
-                   GridView::TEXT=> ['label' => 'Export as TEXT', 'filename' => 'ppa2561all_'.date('Y-d-m')],
+                   GridView::EXCEL=> ['label' => 'ส่งออกไฟล์ excel', 'filename' => 'ppa2561all_'.date('Y-d-m')],
                 ],
         // set your toolbar
             'toolbar' =>  [
@@ -50,7 +47,7 @@ $this->params['breadcrumbs'][] = ['label' => 'รายงานผลการ�
             ],
         // set export properties
             'export' => [
-				'showConfirmAlert'=>false,
+		'showConfirmAlert'=>false,
                 'fontAwesome' => false
             ],
             'pjax' => true,
@@ -63,31 +60,44 @@ $this->params['breadcrumbs'][] = ['label' => 'รายงานผลการ�
                 ['class' => 'kartik\grid\SerialColumn'],
                 [
                     'attribute' => 'byear',
-                    'header' => 'PPA ปี',
+                    'header' => 'ปี',
                 ],
                 [
                     'attribute' => 'hoscode',
-					'format'=>'text', 
-                    'header' => 'PPACODE',
+                    'format'=>'text', 
+                    'header' => 'รหัสหน่วยบริการ',
+                    'contentOptions' => [
+                        'style'=>'max-width:100px;'
+                    ],
                 ],
                 [
                     'attribute' => 'hosname',
-                    'header' => 'HOSPNAME',
+                    'header' => 'ชื่อหน่วยบริการ',
+                    'contentOptions' => [
+                        'style'=>'max-width:200px; overflow: auto; white-space: normal; word-wrap: break-word;'
+                    ],
                 ],
-                   [
+                [
                     'attribute' => 'IDPROJECT',
                     'header' => 'รหัสโครงการ',
+                    'contentOptions' => [
+                        'style'=>'max-width:100px;'
+                    ],
                 ],
-				[
+                [
                     'attribute' => 'NAMEPROJECT',
                     'header' => 'ชื่อโครงการ',
                     'contentOptions' => [
-                        'style'=>'max-width:1000px; overflow: auto; white-space: normal; word-wrap: break-word;'
+                        'style'=>'max-width:400px; overflow: auto; white-space: normal; word-wrap: break-word;'
                     ],
                 ],  
                 [
                     'attribute' => 'result',
                     'header' => 'ผลงาน',
+                ],
+                [
+                    'attribute' => 'd_com',
+                    'header' => 'วันที่ประมวลผล',
                 ]
             ],
         ]);

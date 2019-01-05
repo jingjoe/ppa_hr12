@@ -33,12 +33,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Go Back', 'url' => ['/report2/rep0
             ],
             'responsive' => true,
             'hover' => true,
-			'autoXlFormat'=>true,
+            'autoXlFormat'=>true,
             'exportConfig' => [
-                   GridView::CSV => ['label' => 'Export as CSV', 'filename' => 'year'. $byear.'_'.'ppa'. $pacode.'_'.date('Y-d-m')],
-                   GridView::PDF => ['label' => 'Export as PDF', 'filename' => 'year'. $byear.'_'.'ppa'. $pacode.'_'.date('Y-d-m')],
-                   GridView::EXCEL=> ['label' => 'Export as EXCEL', 'filename' => 'year'. $byear.'_'.'ppa'. $pacode.'_'.date('Y-d-m')],
-                   GridView::TEXT=> ['label' => 'Export as TEXT', 'filename' => 'year'. $byear.'_'.'ppa'. $pacode.'_'.date('Y-d-m')],
+                   GridView::EXCEL=> ['label' => 'ส่งออกไฟล์ excel', 'filename' => 'year'. $byear.'_'.'ppa'. $pacode.'_'.date('Y-d-m')],
                 ],
         // set your toolbar
             'toolbar' =>  [
@@ -65,21 +62,25 @@ $this->params['breadcrumbs'][] = ['label' => 'Go Back', 'url' => ['/report2/rep0
                 ],
                 [
                     'attribute' => 'byear',
-                    'header' => 'PPA ปี',
+                    'header' => 'ปี',
                 ],
                 [
                     'attribute' => 'hoscode',
-					'format'=>'text', 
-                    'header' => 'HOSCODE'
+                    'format'=>'text', 
+                    'header' => 'รหัสหน่วยบริการ'
                 ],
                 [
                     'attribute' => 'hosname',
                     'header' => 'ชื่อหน่วยบริการ',
-                    'width' => '70%',
+                    'width' => '60%',
                 ],
                 [
                     'attribute' => 'result',
                     'header' => 'ผลงาน'
+                ],
+                [
+                    'attribute' => 'd_com',
+                    'header' => 'วันที่ประมวลผล'
                 ],
             ]
         ]);
@@ -89,5 +90,4 @@ $this->params['breadcrumbs'][] = ['label' => 'Go Back', 'url' => ['/report2/rep0
   </div>
 </div>
 
-<span class="glyphicon glyphicon-time"></span> วันที่ประมวลผล <?php echo $com['d_com']; ?> น.
 <?= \bluezed\scrollTop\ScrollTop::widget() ?>

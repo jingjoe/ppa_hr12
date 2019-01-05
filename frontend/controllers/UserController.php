@@ -147,7 +147,7 @@ class UserController extends Controller {
 
     #รายงานจำนวนผู้ใช้งาน
    public function actionStat() {
-       $sql = "SELECT username,COUNT(id) AS visit FROM user_log GROUP BY username ORDER BY visit DESC";
+       $sql = "SELECT username,COUNT(id) AS visit FROM ppa_user_log GROUP BY username ORDER BY visit DESC";
 
        $data = Yii::$app->db->createCommand($sql)->queryAll();
        $dataProvider = new ArrayDataProvider([

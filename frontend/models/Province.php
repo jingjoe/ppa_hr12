@@ -18,7 +18,7 @@ class Province extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'province';
+        return 'ppa_province';
     }
 
     /**

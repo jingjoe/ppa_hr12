@@ -71,7 +71,9 @@ $this->title = 'การบริหารงบค่าใช้จ่าย�
     </div>
 
 <br>
-     <?=GridView::widget([
+<?php
+   if ($cyear == "2561") { 
+      echo  GridView::widget([
             'dataProvider' => $dataProvider,
             'headerRowOptions' => ['style' => 'background-color:#cccccc'],
             'responsive' => true,
@@ -87,6 +89,7 @@ $this->title = 'การบริหารงบค่าใช้จ่าย�
                 [
                     'attribute' => 'IDPROJECT',
                     'header' => 'รหัสโครงการ',
+                    'width' => '10%',  
                 ],
                 [
                     'label' => 'ชื่อโครงการ',
@@ -100,21 +103,25 @@ $this->title = 'การบริหารงบค่าใช้จ่าย�
                 ],        
             ],
         ]);
-        ?>
-    </div>
+   
+    } 
+?>
+
+</div>
 
 
 <?php
-    if ($cyear == "2562" && $provcode<>'01' ) { 
+    if ($cyear == "2562" && $provcode<>'01') { 
         echo  $this->render('_ppa2562',[
             'cyear' => $cyear,
             'provcode' => $provcode
         ]);
     }  
 ?>
+
 <div class="row">
     <div class="col-lg-12">
-        <div class="pull-right bg-danger">
+        <div class="pull-right">
             <span class="glyphicon glyphicon-time"></span> วันที่ประมวลผล <?php echo $date; ?> น.
         </div>
     </div>

@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         //'auth_key',
         //['attribute'=>'password_hash','label'=>'รหัสผ่าน'],
         //'password_reset_token',
-        'email',
+        //'email',
         //'user_role.role_id',
         [
             'attribute' => 'role',
@@ -53,8 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
             },
             'filter' => \yii\helpers\ArrayHelper::map(frontend\models\UserStatus::find()->all(), 'status_name', 'status_desc'),
         ],
-        'created_at',
-        'updated_at',
+        //'created_at',
+        //'updated_at',
         ['class' => 'yii\grid\ActionColumn', 
                 'template' => '{view}<span class="glyphicon glyphicon-option-vertical"></span>{update}<span class="glyphicon glyphicon-option-vertical"></span>{delete}'
         ]

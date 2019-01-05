@@ -33,12 +33,9 @@ $this->params['breadcrumbs'][] = ['label' => 'รายงานผลการ�
             ],
             'responsive' => true,
             'hover' => true,
-			'autoXlFormat'=>true,
+            'autoXlFormat'=>true,
             'exportConfig' => [
-                   GridView::CSV => ['label' => 'Export as CSV', 'filename' => 'ppa2562_'. $pacode.'_'.date('Y-d-m')],
-                   GridView::PDF => ['label' => 'Export as PDF', 'filename' => 'ppa2562_'. $pacode.'_'.date('Y-d-m')],
-                   GridView::EXCEL=> ['label' => 'Export as EXCEL', 'filename' => 'ppa2562_'. $pacode.'_'.date('Y-d-m')],
-                   GridView::TEXT=> ['label' => 'Export as TEXT', 'filename' => 'ppa2562_'. $pacode.'_'.date('Y-d-m')],
+                   GridView::EXCEL=> ['label' => 'ส่งออกไฟล์ excel', 'filename' => 'ppa2562_'. $pacode.'_'.date('Y-d-m')],
                 ],
         // set your toolbar
             'toolbar' =>  [
@@ -69,7 +66,7 @@ $this->params['breadcrumbs'][] = ['label' => 'รายงานผลการ�
                 ],
                 [
                     'attribute' => 'hoscode',
-					'format'=>'text', 
+                    'format'=>'text', 
                     'header' => 'HOSCODE'
                 ],
                 [
@@ -88,6 +85,12 @@ $this->params['breadcrumbs'][] = ['label' => 'รายงานผลการ�
       
   </div>
 </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pull-right">
+            <span class="glyphicon glyphicon-time"></span> วันที่ประมวลผล <?php echo $com['d_com']; ?> น.
+        </div>
+    </div>
+</div>
 
-<span class="glyphicon glyphicon-time"></span> วันที่ประมวลผล <?php echo $com['d_com']; ?> น.
 <?= \bluezed\scrollTop\ScrollTop::widget() ?>

@@ -18,7 +18,7 @@ class SysSetTime extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'set_datetime';
+        return 'ppa_set_datetime';
     }
 
     /**

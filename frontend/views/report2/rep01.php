@@ -62,10 +62,7 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการบันทึก�
             'hover' => true,
 			'autoXlFormat'=>true,
             'exportConfig' => [
-                   GridView::CSV => ['label' => 'Export as CSV', 'filename' => 'year'. $cyear.'_'.'ppa_code'. $pacode.'_'.date('Y-d-m')],
-                   GridView::PDF => ['label' => 'Export as PDF', 'filename' => 'year'. $cyear.'_'.'ppa_code'. $pacode.'_'.date('Y-d-m')],
-                   GridView::EXCEL=> ['label' => 'Export as EXCEL', 'filename' => 'year'. $cyear.'_'.'ppa_code'. $pacode.'_'.date('Y-d-m')],
-                   GridView::TEXT=> ['label' => 'Export as TEXT', 'filename' => 'year'. $cyear.'_'.'ppa_code'. $pacode.'_'.date('Y-d-m')],
+                   GridView::EXCEL=> ['label' => 'ส่งออกไฟล์ excel', 'filename' => 'year'. $cyear.'_'.'ppa_code'. $pacode.'_'.date('Y-d-m')],
                 ],
         // set your toolbar
             'toolbar' =>  [
@@ -94,37 +91,30 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการบันทึก�
                 ],
 		[
                     'attribute' => 'IDPROJECT',
-                    'header' => 'PPACODE',
+                    'header' => 'รหัสโครงการ',
                     'contentOptions' => [
-                        'style'=>'max-width:50px;'
+                        'style'=>'max-width:100px;'
                     ],
                 ],
                 [
-                    'label' => 'PPANAME',
+                    'label' => 'ชื่อโครงการ',
                     'format' => 'raw',
                     'value' => function($model){
                         return Html::a(Html::encode($model['NAMEPROJECT']), ['/report2/detail1','byear' => $model['BYEAR'], 'pacode' => $model['IDPROJECT']]);
                     },
                     'contentOptions' => [
-                        'style'=>'max-width:1000px; overflow: auto; white-space: normal; word-wrap: break-word;'
+                        'style'=>'max-width:900px; overflow: auto; white-space: normal; word-wrap: break-word;'
                     ],
-                ],
-                [
-                    'attribute' => 'D_COM',
-                    'header' => 'วันที่ประมวลผล',
-                ]
-             /*   [
-                    'attribute' => 'HOSPNAME',
-                    'header' => 'HOSPNAME',
-                     'contentOptions' => [
-                        'style'=>'max-width:50px;'
-                    ],
-                    
-                ], */
-                    
+                ],        
             ],
         ]);
         ?>
     </div>
-
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pull-right">
+            <span class="glyphicon glyphicon-time"></span> วันที่ประมวลผล <?php echo $date; ?> น.
+        </div>
+    </div>
+</div>
 <?= \bluezed\scrollTop\ScrollTop::widget() ?>

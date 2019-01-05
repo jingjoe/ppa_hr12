@@ -20,7 +20,7 @@ class District extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'district';
+        return 'ppa_district';
     }
 
     /**

@@ -119,19 +119,25 @@ $form = ActiveForm::begin([
         ],
         [
             'attribute' => 'hoscode',
-			'format'=>'text', 
-            'header' => 'HCODE',
+            'format'=>'text', 
+            'header' => 'รหัสหน่วยบริการ',
+            'contentOptions' => [
+               'style'=>'max-width:100px;'
+            ],
         ],
         [
             'attribute' => 'IDPROJECT',
             'header' => 'รหัสโครงการ',
+            'contentOptions' => [
+                'style'=>'max-width:100px;'
+            ],
         ], 
         [
             'attribute' => 'NAMEPROJECT',
             'label' => 'ชื่อโครงการ',
             'format' => 'raw',
             'contentOptions' => [
-                'style'=>'max-width:1000px; overflow: auto; white-space: normal; word-wrap: break-word;'
+                'style'=>'max-width:600px; overflow: auto; white-space: normal; word-wrap: break-word;'
             ], 
         ], 
         [

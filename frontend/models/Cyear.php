@@ -16,7 +16,7 @@ class Cyear extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'cyear';
+        return 'ppa_cyear';
     }
 
     /**

@@ -20,7 +20,7 @@ class SessionFrontendUser extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'session_frontend_user';
+        return 'ppa_session_frontend_user';
     }
 
     /**

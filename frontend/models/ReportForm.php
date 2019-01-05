@@ -14,8 +14,7 @@ class ReportForm extends Model{
     
     public function rules(){
         return [
-            [['byear','province','district','hospital'], 'required'],
-
+            [['byear','province','district','hospital'], 'required']
         ];
     }
 

@@ -150,10 +150,7 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
             'hover' => true,
 	    'autoXlFormat'=>true,
             'exportConfig' => [
-                   GridView::CSV => ['label' => 'Export as CSV', 'filename' => 'ppa_y'.$cyear.'ppa_code'.$pacode.'date'.date('Y-d-m')],
-                   GridView::PDF => ['label' => 'Export as PDF', 'filename' => 'ppa_y'.$cyear.'ppa_code'.$pacode.'date'.date('Y-d-m')],
-                   GridView::EXCEL=> ['label' => 'Export as EXCEL', 'filename' => 'ppa_y'.$cyear.'ppa_code'.$pacode.'date'.date('Y-d-m')],
-                   GridView::TEXT=> ['label' => 'Export as TEXT', 'filename' => 'ppa_y'.$cyear.'ppa_code'.$pacode.'date'.date('Y-d-m')],
+                   GridView::EXCEL=> ['label' => 'ส่งออกไฟล์ excel', 'filename' => 'ppa_y'.$cyear.'ppa_code'.$pacode.'date'.date('Y-d-m')],
                 ],
         // set your toolbar
             'toolbar' =>  [
@@ -180,7 +177,7 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
                 ],
                 [
                     'attribute' => 'BYEAR',
-                    'header' => 'PPA ปี'
+                    'header' => 'ปี'
                 ],
                 [
                     'attribute' => 'HOSPCODE',
@@ -242,5 +239,11 @@ $this->params['breadcrumbs'][] = ['label' => 'ผลการการบัน�
         ?>
      </div>
 </div>
-<span class="glyphicon glyphicon-time"></span> วันที่ประมวลผล <?php echo $date; ?> น.
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pull-right">
+            <span class="glyphicon glyphicon-time"></span> วันที่ประมวลผล <?php echo $date; ?> น.
+        </div>
+    </div>
+</div>
 <?= \bluezed\scrollTop\ScrollTop::widget() ?>

@@ -85,31 +85,12 @@ class SiteController extends Controller
             if (Yii::$app->request->isPost) {$provcode = $_POST['provcode'];
         }
        
-     
-        if ($cyear == "2562") {
-            
-            $q_date = "SELECT IF(MIN(D_COM) IS NULL,'0000-00-00 00:00:00',MIN(D_COM)) AS d_com FROM s_result_2562 WHERE BYEAR=$cyear AND PROVCODE=$provcode ";
+            $q_date = "SELECT IF(MIN(D_COM) IS NULL,'0000-00-00 00:00:00',MIN(D_COM)) AS d_com FROM ppa_s_result WHERE BYEAR=$cyear AND PROVCODE=$provcode ";
             $sql_date = Yii::$app->db->createCommand($q_date)->queryOne();
             $date =  $sql_date['d_com'];
 
             $sql = "SELECT IDPROJECT,NAMEPROJECT,IF(D_COM IS NULL,NOW(),MIN(D_COM)) AS D_COM
-                    FROM s_result_2562
-                    WHERE PROVCODE=$provcode
-                    AND BYEAR=$cyear
-                    GROUP BY IDPROJECT ";
-
-            $data = Yii::$app->db->createCommand($sql)->queryAll();
-            $dataProvider = new ArrayDataProvider([
-                'allModels'=>$data,
-            ]);
-        } else {
-            
-            $q_date = "SELECT IF(MIN(D_COM) IS NULL,'0000-00-00 00:00:00',MIN(D_COM)) AS d_com FROM s_result WHERE BYEAR=$cyear AND PROVCODE=$provcode ";
-            $sql_date = Yii::$app->db->createCommand($q_date)->queryOne();
-            $date =  $sql_date['d_com'];
-
-            $sql = "SELECT IDPROJECT,NAMEPROJECT,IF(D_COM IS NULL,NOW(),MIN(D_COM)) AS D_COM
-                    FROM s_result
+                    FROM ppa_s_result
                     WHERE PROVCODE=$provcode
                     AND BYEAR=$cyear
                     GROUP BY IDPROJECT ";
@@ -118,7 +99,7 @@ class SiteController extends Controller
             $dataProvider = new ArrayDataProvider([
                 'allModels'=>$data
             ]);
-        }   
+   
        
         return $this->render('index', [
             'dataProvider' => $dataProvider, 
@@ -144,7 +125,7 @@ class SiteController extends Controller
             $username = $model->username;
             $ip = \Yii::$app->getRequest()->getUserIP();
 
-            $sql = " INSERT INTO `user_log` (`username`,`login_date`, `ip`) VALUES ('$username',NOW(), '$ip') ";
+            $sql = " INSERT INTO `ppa_user_log` (`username`,`login_date`, `ip`) VALUES ('$username',NOW(), '$ip') ";
             \Yii::$app->db->createCommand($sql)->execute();
             return $this->goBack();
         } else {
